@@ -1,2 +1,3 @@
 build
 rebel.xml
+*.launch
