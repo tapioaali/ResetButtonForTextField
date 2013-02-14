@@ -5,12 +5,14 @@
 .v-textfield-resetbutton {
 	position: relative;
 	display: inline-block;
-	top: -1px;
 	right: 19px;
 	cursor: pointer;
 	width: 16px;
-	height: 16px;
+	height: 24px;
 	background-image: url(resetbutton-default.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	vertical-align: bottom;
 }
 
 .v-textfield-resetbutton:hover {
