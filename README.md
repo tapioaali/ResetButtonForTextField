@@ -1,1 +1,1 @@
-Vaadin 7 add-on to add a reset button to TextField. Also an example project for my blog post.
+Vaadin 7 add-on **ResetButtonForTextField**. Also an example project for my blog post.

@@ -7,8 +7,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.AttachEvent;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
 import com.vaadin.client.ComponentConnector;
@@ -21,9 +19,7 @@ import com.vaadin.shared.ui.Connect;
 @Connect(ResetButtonForTextField.class)
 public class ResetButtonForTextFieldConnector extends
         AbstractExtensionConnector implements KeyUpHandler, ClickHandler,
-        ValueChangeHandler<String>, AttachEvent.Handler,
-        StateChangeEvent.StateChangeHandler {
-    private static final long serialVersionUID = 975266906597151369L;
+        AttachEvent.Handler, StateChangeEvent.StateChangeHandler {
 
     private VTextField field;
     private Label resetButtonLabel;
@@ -31,35 +27,15 @@ public class ResetButtonForTextFieldConnector extends
     @Override
     protected void extend(ServerConnector target) {
         field = (VTextField) ((ComponentConnector) target).getWidget();
-        field.addStyleName("resetbuttonfortextfield-field");
+        field.addStyleName(VTextField.CLASSNAME + "-withresetbutton");
 
         resetButtonLabel = Label.wrap(DOM.createDiv());
-        resetButtonLabel.addStyleName("resetbuttonfortextfield-button");
+        resetButtonLabel.addStyleName(VTextField.CLASSNAME + "-resetbutton");
 
         field.addAttachHandler(this);
         field.addKeyUpHandler(this);
-        field.addValueChangeHandler(this);
 
         resetButtonLabel.addClickHandler(this);
-    }
-
-    @Override
-    public void onStateChanged(StateChangeEvent stateChangeEvent) {
-        field.setValue(getState().value);
-        setResetButtonVisibility();
-    }
-
-    private void setResetButtonVisibility() {
-        if (field.getValue().isEmpty()) {
-            resetButtonLabel.setVisible(false);
-        } else {
-            resetButtonLabel.setVisible(true);
-        }
-    }
-
-    @Override
-    public ResetButtonForTextFieldState getState() {
-        return (ResetButtonForTextFieldState) super.getState();
     }
 
     @Override
@@ -77,18 +53,28 @@ public class ResetButtonForTextFieldConnector extends
     }
 
     @Override
-    public void onValueChange(ValueChangeEvent<String> event) {
-        String newText = field.getText();
-        field.setValue(newText);
+    public ResetButtonForTextFieldState getState() {
+        return (ResetButtonForTextFieldState) super.getState();
+    }
+
+    @Override
+    public void onStateChanged(StateChangeEvent stateChangeEvent) {
+        field.setValue(getState().value);
         setResetButtonVisibility();
     }
 
     @Override
     public void onClick(ClickEvent event) {
         field.setValue("");
-        field.setText("");
         field.valueChange(true);
         setResetButtonVisibility();
     }
 
+    private void setResetButtonVisibility() {
+        if (field.getValue().isEmpty()) {
+            resetButtonLabel.setVisible(false);
+        } else {
+            resetButtonLabel.setVisible(true);
+        }
+    }
 }
