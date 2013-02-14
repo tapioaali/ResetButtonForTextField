@@ -14,9 +14,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 
-/**
- * Main UI class
- */
 @SuppressWarnings("serial")
 public class ResetButtonForTextFieldTestUI extends UI {
 
