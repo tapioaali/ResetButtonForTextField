@@ -6,7 +6,6 @@
 	position: relative;
 	display: inline-block;
 	right: 19px;
-	cursor: pointer;
 	width: 16px;
 	height: 24px;
 	background-image: url(resetbutton-default.png);
@@ -17,4 +16,5 @@
 
 .v-textfield-resetbutton:hover {
 	background-image: url(resetbutton-hover.png);
+    cursor: pointer;
 }

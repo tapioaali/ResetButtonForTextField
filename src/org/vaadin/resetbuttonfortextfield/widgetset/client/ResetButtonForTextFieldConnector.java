@@ -21,28 +21,28 @@ public class ResetButtonForTextFieldConnector extends
         AbstractExtensionConnector implements KeyUpHandler, ClickHandler,
         AttachEvent.Handler, StateChangeEvent.StateChangeHandler {
 
-    private VTextField field;
-    private HTML resetButtonDiv;
+    private VTextField textField;
+    private HTML resetButton;
 
     @Override
     protected void extend(ServerConnector target) {
-        field = (VTextField) ((ComponentConnector) target).getWidget();
-        field.addStyleName(VTextField.CLASSNAME + "-withresetbutton");
+        textField = (VTextField) ((ComponentConnector) target).getWidget();
+        textField.addStyleName(VTextField.CLASSNAME + "-withresetbutton");
 
-        resetButtonDiv = HTML.wrap(DOM.createDiv());
-        resetButtonDiv.addStyleName(VTextField.CLASSNAME + "-resetbutton");
+        resetButton = HTML.wrap(DOM.createDiv());
+        resetButton.addStyleName(VTextField.CLASSNAME + "-resetbutton");
 
-        field.addAttachHandler(this);
-        field.addKeyUpHandler(this);
+        textField.addAttachHandler(this);
+        textField.addKeyUpHandler(this);
 
-        resetButtonDiv.addClickHandler(this);
+        resetButton.addClickHandler(this);
     }
 
     @Override
     public void onAttachOrDetach(AttachEvent event) {
         if (event.isAttached()) {
-            field.getElement().getParentElement()
-                    .appendChild(resetButtonDiv.getElement());
+            textField.getElement().getParentElement()
+                    .appendChild(resetButton.getElement());
             setResetButtonVisibility();
         }
     }
@@ -59,22 +59,22 @@ public class ResetButtonForTextFieldConnector extends
 
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
-        field.setValue(getState().value);
+        textField.setValue(getState().value);
         setResetButtonVisibility();
     }
 
     @Override
     public void onClick(ClickEvent event) {
-        field.setValue("");
-        field.valueChange(true);
+        textField.setValue("");
+        textField.valueChange(true);
         setResetButtonVisibility();
     }
 
     private void setResetButtonVisibility() {
-        if (field.getValue().isEmpty()) {
-            resetButtonDiv.setVisible(false);
+        if (textField.getValue().isEmpty()) {
+            resetButton.setVisible(false);
         } else {
-            resetButtonDiv.setVisible(true);
+            resetButton.setVisible(true);
         }
     }
 }
