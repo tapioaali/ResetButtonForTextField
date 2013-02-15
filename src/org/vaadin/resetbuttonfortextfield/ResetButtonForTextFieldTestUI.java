@@ -27,7 +27,7 @@ public class ResetButtonForTextFieldTestUI extends UI {
         new ResetButtonForTextField().extend(tf);
         layout.addComponent(tf);
         tf.setImmediate(true);
-        tf.setWidth("500px");
+        tf.setWidth("300px");
 
         final Label textChangeEventListenerLabel = new Label();
         textChangeEventListenerLabel.setCaption("I show textChangeEvents!");
