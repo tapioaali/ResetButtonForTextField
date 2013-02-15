@@ -4,3 +4,5 @@ Usage: add the JAR to your project, compile widgetset and extend any TextField:
 
     TextField tf = new TextField();
     new ResetButtonForTextField().extend(tf);
+
+Grab it from Vaadin Directory: [http://vaadin.com/addon/resetbuttonfortextfield](http://vaadin.com/addon/resetbuttonfortextfield)
