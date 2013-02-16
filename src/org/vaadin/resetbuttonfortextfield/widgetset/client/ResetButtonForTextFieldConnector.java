@@ -21,16 +21,20 @@ public class ResetButtonForTextFieldConnector extends
         AbstractExtensionConnector implements KeyUpHandler, ClickHandler,
         AttachEvent.Handler, StateChangeEvent.StateChangeHandler {
 
+	private static final long serialVersionUID = -1784280042163496505L;
+
+	public static final String CLASSNAME = "resetbuttonfortextfield";
+	
     private VTextField textField;
     private HTML resetButton;
 
     @Override
     protected void extend(ServerConnector target) {
         textField = (VTextField) ((ComponentConnector) target).getWidget();
-        textField.addStyleName(VTextField.CLASSNAME + "-withresetbutton");
+        textField.addStyleName(CLASSNAME + "-textfield");
 
         resetButton = HTML.wrap(DOM.createDiv());
-        resetButton.addStyleName(VTextField.CLASSNAME + "-resetbutton");
+        resetButton.addStyleName(CLASSNAME + "-resetbutton");
 
         textField.addAttachHandler(this);
         textField.addKeyUpHandler(this);

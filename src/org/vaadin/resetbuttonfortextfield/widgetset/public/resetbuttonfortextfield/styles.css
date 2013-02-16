@@ -1,8 +1,8 @@
-.v-textfield-withresetbutton {
+.resetbuttonfortextfield-textfield {
 	padding-right: 20px !important;
 }
 
-.v-textfield-resetbutton {
+.resetbuttonfortextfield-resetbutton {
 	position: relative;
 	display: inline-block;
 	right: 19px;
@@ -14,7 +14,7 @@
 	vertical-align: bottom;
 }
 
-.v-textfield-resetbutton:hover {
+.resetbuttonfortextfield-resetbutton:hover {
 	background-image: url(resetbutton-hover.png);
     cursor: pointer;
 }
