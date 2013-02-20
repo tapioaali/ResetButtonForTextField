@@ -47,7 +47,7 @@ public class ResetButtonForTextFieldConnector extends
 
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
-        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
             @Override
             public void execute() {
                 updateResetButtonVisibility();
