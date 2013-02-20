@@ -6,8 +6,6 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.AttachEvent;
@@ -21,7 +19,7 @@ import com.vaadin.shared.ui.Connect;
 
 @Connect(ResetButtonForTextField.class)
 public class ResetButtonForTextFieldConnector extends
-        AbstractExtensionConnector implements KeyUpHandler, ChangeHandler,
+        AbstractExtensionConnector implements KeyUpHandler,
         AttachEvent.Handler, StateChangeEvent.StateChangeHandler {
 
     public static final String CLASSNAME = "resetbuttonfortextfield";
@@ -36,52 +34,51 @@ public class ResetButtonForTextFieldConnector extends
 
         resetButtonElement = DOM.createDiv();
         resetButtonElement.addClassName(CLASSNAME + "-resetbutton");
-        addResetButtonClickListener(resetButtonElement);
+        resetButtonElement.setInnerHTML("X");
 
         textField.addAttachHandler(this);
+        
         textField.addKeyUpHandler(this);
-        textField.addChangeHandler(this);
-
         target.addStateChangeHandler(this);
+
     }
 
     @Override
-    public void onStateChanged(StateChangeEvent stateChangeEvent) {
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                updateResetButtonVisibility();
-            }
-        });
-    }
+	public void onStateChanged(StateChangeEvent stateChangeEvent) {
+	    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+	        @Override
+	        public void execute() {
+	            updateResetButtonVisibility();
+	        }
+	    });
+	}
 
-    public native void addResetButtonClickListener(Element el)
-    /*-{
-        var me = this; 
-        el.onclick = function() { 
-            me.@org.vaadin.resetbuttonfortextfield.widgetset.client.ResetButtonForTextFieldConnector::clearTextField()();
-        }; 
-    }-*/;
-
-    public native void removeResetButtonClickListener(Element el)
-    /*-{
-        el.onclick = null
-        }; 
-    }-*/;
+	public native void addResetButtonClickListener(Element el)
+	/*-{
+	    var me = this; 
+	    el.onclick = function() { 
+	        me.@org.vaadin.resetbuttonfortextfield.widgetset.client.ResetButtonForTextFieldConnector::clearTextField()();
+	    }; 
+	}-*/;
+	
+	public native void removeResetButtonClickListener(Element el)
+	/*-{
+	    el.onclick = null;
+	}-*/;
 
     @Override
     public void onAttachOrDetach(AttachEvent event) {
         Element parentElement = textField.getElement().getParentElement();
-
         if (event.isAttached()) {
             parentElement.insertAfter(resetButtonElement,
                     textField.getElement());
             updateResetButtonVisibility();
+            addResetButtonClickListener(resetButtonElement);
         } else {
-            removeResetButtonClickListener(resetButtonElement);
             if (parentElement != null) {
                 parentElement.removeChild(resetButtonElement);
             }
+            removeResetButtonClickListener(resetButtonElement);
         }
     }
 
@@ -90,23 +87,18 @@ public class ResetButtonForTextFieldConnector extends
         updateResetButtonVisibility();
     }
 
-    @Override
-    public void onChange(ChangeEvent event) {
-        updateResetButtonVisibility();
-    }
-
-    private void clearTextField() {
-        textField.setValue("");
-        textField.valueChange(true);
-        updateResetButtonVisibility();
-        textField.getElement().focus();
-    }
-
     private void updateResetButtonVisibility() {
         if (textField.getValue().isEmpty()) {
             resetButtonElement.getStyle().setDisplay(Display.NONE);
         } else {
             resetButtonElement.getStyle().clearDisplay();
         }
+    }    
+    
+    private void clearTextField() {
+        textField.setValue("");
+        textField.valueChange(true);
+        updateResetButtonVisibility();
+        textField.getElement().focus();
     }
 }
