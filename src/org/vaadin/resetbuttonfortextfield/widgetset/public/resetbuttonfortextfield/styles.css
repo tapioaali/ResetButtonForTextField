@@ -8,28 +8,24 @@
     vertical-align: bottom;
     right: 15pt;
     top: -3pt;
-    padding: 0;
-    border-radius: 15pt;
-    background-color: #c3c3c3;
-    color: #ffffff;
     cursor: pointer;
-    text-align: center;
-    font-size: 13pt;
-    width: 13pt;
-    height: 12pt;
-    line-height: 1;
+    width: 16px;
+    height: 16px;
+	background-image: url(resetbutton-default.svg);
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .resetbuttonfortextfield-resetbutton:hover {
-    background-color: #575757;
+	background-image: url(resetbutton-hover.svg);
     cursor: pointer;
 }
 
-.v-ios .resetbuttonfortextfield-resetbutton, .v-ff .resetbuttonfortextfield-resetbutton {
-	line-height: 0.9;
+.v-ie8 .resetbuttonfortextfield-resetbutton {
+	background-image: url(resetbutton-default.png);
 }
 
-.android {
-	line-height: 0.8;
-	font-size: 15pt;
+.v-ie8 .resetbuttonfortextfield-resetbutton:hover {
+	background-image: url(resetbutton-hover.png);	
 }
+

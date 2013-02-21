@@ -21,8 +21,9 @@ import com.vaadin.shared.ui.Connect;
 public class ResetButtonForTextFieldConnector extends
         AbstractExtensionConnector implements KeyUpHandler,
         AttachEvent.Handler, StateChangeEvent.StateChangeHandler {
+	private static final long serialVersionUID = -737765038361894693L;
 
-    public static final String CLASSNAME = "resetbuttonfortextfield";
+	public static final String CLASSNAME = "resetbuttonfortextfield";
 
     private VTextField textField;
     private Element resetButtonElement;
@@ -34,13 +35,14 @@ public class ResetButtonForTextFieldConnector extends
 
         resetButtonElement = DOM.createDiv();
         resetButtonElement.addClassName(CLASSNAME + "-resetbutton");
-        resetButtonElement.setInnerText("×");
 
         textField.addAttachHandler(this);
         textField.addKeyUpHandler(this);
 
         target.addStateChangeHandler(new StateChangeEvent.StateChangeHandler() {
-            @Override
+			private static final long serialVersionUID = -8439729365677484553L;
+
+			@Override
             public void onStateChanged(StateChangeEvent stateChangeEvent) {
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     @Override
