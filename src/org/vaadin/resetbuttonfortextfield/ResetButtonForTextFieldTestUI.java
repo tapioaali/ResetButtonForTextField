@@ -24,7 +24,7 @@ public class ResetButtonForTextFieldTestUI extends UI {
         setContent(layout);
 
         final TextField tf = new TextField("Type something, please");
-        new ResetButtonForTextField().extend(tf);
+        ResetButtonForTextField.extend(tf);
         layout.addComponent(tf);
         tf.setImmediate(true);
         tf.setWidth("300px");

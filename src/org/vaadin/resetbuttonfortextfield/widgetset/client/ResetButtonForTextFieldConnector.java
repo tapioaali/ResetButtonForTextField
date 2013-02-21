@@ -34,47 +34,47 @@ public class ResetButtonForTextFieldConnector extends
 
         resetButtonElement = DOM.createDiv();
         resetButtonElement.addClassName(CLASSNAME + "-resetbutton");
-        resetButtonElement.setInnerHTML("X");
+        resetButtonElement.setInnerText("X");
 
         textField.addAttachHandler(this);
-        
+
         textField.addKeyUpHandler(this);
         target.addStateChangeHandler(this);
 
     }
 
     @Override
-	public void onStateChanged(StateChangeEvent stateChangeEvent) {
-	    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-	        @Override
-	        public void execute() {
-	            updateResetButtonVisibility();
-	        }
-	    });
-	}
+    public void onStateChanged(StateChangeEvent stateChangeEvent) {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                updateResetButtonVisibility();
+            }
+        });
+    }
 
-	public native void addResetButtonClickListener(Element el)
-	/*-{
-	    var me = this; 
-	    el.onclick = function() { 
-	        me.@org.vaadin.resetbuttonfortextfield.widgetset.client.ResetButtonForTextFieldConnector::clearTextField()();
-	    }; 
-	}-*/;
-	
-	public native void removeResetButtonClickListener(Element el)
-	/*-{
-	    el.onclick = null;
-	}-*/;
+    public native void addResetButtonClickListener(Element el)
+    /*-{
+        var self = this; 
+        el.onclick = $entry(function() { 
+            self.@org.vaadin.resetbuttonfortextfield.widgetset.client.ResetButtonForTextFieldConnector::clearTextField()();
+        }); 
+    }-*/;
+
+    public native void removeResetButtonClickListener(Element el)
+    /*-{
+        el.onclick = null;
+    }-*/;
 
     @Override
     public void onAttachOrDetach(AttachEvent event) {
-        Element parentElement = textField.getElement().getParentElement();
         if (event.isAttached()) {
-            parentElement.insertAfter(resetButtonElement,
-                    textField.getElement());
+            textField.getElement().getParentElement()
+                    .insertAfter(resetButtonElement, textField.getElement());
             updateResetButtonVisibility();
             addResetButtonClickListener(resetButtonElement);
         } else {
+            Element parentElement = resetButtonElement.getParentElement();
             if (parentElement != null) {
                 parentElement.removeChild(resetButtonElement);
             }
@@ -93,8 +93,8 @@ public class ResetButtonForTextFieldConnector extends
         } else {
             resetButtonElement.getStyle().clearDisplay();
         }
-    }    
-    
+    }
+
     private void clearTextField() {
         textField.setValue("");
         textField.valueChange(true);
