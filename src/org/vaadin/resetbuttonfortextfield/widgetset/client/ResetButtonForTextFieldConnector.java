@@ -34,21 +34,20 @@ public class ResetButtonForTextFieldConnector extends
 
         resetButtonElement = DOM.createDiv();
         resetButtonElement.addClassName(CLASSNAME + "-resetbutton");
-        resetButtonElement.setInnerText("X");
+        resetButtonElement.setInnerText("×");
 
         textField.addAttachHandler(this);
-
         textField.addKeyUpHandler(this);
-        target.addStateChangeHandler(this);
 
-    }
-
-    @Override
-    public void onStateChanged(StateChangeEvent stateChangeEvent) {
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        target.addStateChangeHandler(new StateChangeEvent.StateChangeHandler() {
             @Override
-            public void execute() {
-                updateResetButtonVisibility();
+            public void onStateChanged(StateChangeEvent stateChangeEvent) {
+                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                    @Override
+                    public void execute() {
+                        updateResetButtonVisibility();
+                    }
+                });
             }
         });
     }
