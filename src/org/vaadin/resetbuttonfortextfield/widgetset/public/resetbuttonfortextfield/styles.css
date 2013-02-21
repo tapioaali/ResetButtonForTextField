@@ -11,21 +11,21 @@
     cursor: pointer;
     width: 16px;
     height: 16px;
-	background-image: url(resetbutton-default.svg);
-	background-position: center center;
-	background-repeat: no-repeat;
+    background-image: url(resetbutton-default.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .resetbuttonfortextfield-resetbutton:hover {
-	background-image: url(resetbutton-hover.svg);
+    background-image: url(resetbutton-hover.svg);
     cursor: pointer;
 }
 
 .v-ie8 .resetbuttonfortextfield-resetbutton {
-	background-image: url(resetbutton-default.png);
+    background-image: url(resetbutton-default.png);
 }
 
 .v-ie8 .resetbuttonfortextfield-resetbutton:hover {
-	background-image: url(resetbutton-hover.png);	
+    background-image: url(resetbutton-hover.png);    
 }
 
