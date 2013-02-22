@@ -21,9 +21,9 @@ import com.vaadin.shared.ui.Connect;
 public class ResetButtonForTextFieldConnector extends
         AbstractExtensionConnector implements KeyUpHandler,
         AttachEvent.Handler, StateChangeEvent.StateChangeHandler {
-	private static final long serialVersionUID = -737765038361894693L;
+    private static final long serialVersionUID = -737765038361894693L;
 
-	public static final String CLASSNAME = "resetbuttonfortextfield";
+    public static final String CLASSNAME = "resetbuttonfortextfield";
 
     private VTextField textField;
     private Element resetButtonElement;
