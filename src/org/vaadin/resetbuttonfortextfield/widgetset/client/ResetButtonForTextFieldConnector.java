@@ -40,9 +40,8 @@ public class ResetButtonForTextFieldConnector extends
         textField.addKeyUpHandler(this);
 
         target.addStateChangeHandler(new StateChangeEvent.StateChangeHandler() {
-			private static final long serialVersionUID = -8439729365677484553L;
-
-			@Override
+        private static final long serialVersionUID = -8439729365677484553L;        	
+            @Override
             public void onStateChanged(StateChangeEvent stateChangeEvent) {
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                     @Override
