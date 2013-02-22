@@ -3,8 +3,7 @@ component that allows user to reset the field with one click.
 
 The reset button is drawn using SVG images in supported browsers. For IE8 there PNG versions are used.
 
-
- Also an example project for my blog post.
+Also an example project for my blog post (url to be added).
 
 Usage: add the JAR to your project, compile widgetset and extend any TextField:
 
