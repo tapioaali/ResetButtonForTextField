@@ -30,15 +30,6 @@ public class ResetButtonForTextFieldConnector extends
 
     @Override
     protected void extend(ServerConnector target) {
-        textField = (VTextField) ((ComponentConnector) target).getWidget();
-        textField.addStyleName(CLASSNAME + "-textfield");
-
-        resetButtonElement = DOM.createDiv();
-        resetButtonElement.addClassName(CLASSNAME + "-resetbutton");
-
-        textField.addAttachHandler(this);
-        textField.addKeyUpHandler(this);
-
         target.addStateChangeHandler(new StateChangeEvent.StateChangeHandler() {
         private static final long serialVersionUID = -8439729365677484553L;        	
             @Override
@@ -51,6 +42,15 @@ public class ResetButtonForTextFieldConnector extends
                 });
             }
         });
+    	
+    	textField = (VTextField) ((ComponentConnector) target).getWidget();
+        textField.addStyleName(CLASSNAME + "-textfield");
+
+        resetButtonElement = DOM.createDiv();
+        resetButtonElement.addClassName(CLASSNAME + "-resetbutton");
+
+        textField.addAttachHandler(this);
+        textField.addKeyUpHandler(this);
     }
 
     public native void addResetButtonClickListener(Element el)
