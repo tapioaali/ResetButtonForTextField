@@ -1,7 +1,7 @@
 Vaadin 7 add-on **ResetButtonForTextField** version 1.0.3. It adds a reset button to the TextField 
 component that allows user to reset the field with one click.
 
-The reset button is drawn using SVG images in supported browsers and for IE8 there are PNG renders too.
+The reset button is drawn using SVG images in supported browsers. For IE8 there PNG versions are used.
 
 
  Also an example project for my blog post.
