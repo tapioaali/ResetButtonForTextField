@@ -31,7 +31,8 @@ public class ResetButtonForTextFieldConnector extends
     @Override
     protected void extend(ServerConnector target) {
         target.addStateChangeHandler(new StateChangeEvent.StateChangeHandler() {
-        private static final long serialVersionUID = -8439729365677484553L;        	
+            private static final long serialVersionUID = -8439729365677484553L;
+
             @Override
             public void onStateChanged(StateChangeEvent stateChangeEvent) {
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -42,8 +43,8 @@ public class ResetButtonForTextFieldConnector extends
                 });
             }
         });
-    	
-    	textField = (VTextField) ((ComponentConnector) target).getWidget();
+
+        textField = (VTextField) ((ComponentConnector) target).getWidget();
         textField.addStyleName(CLASSNAME + "-textfield");
 
         resetButtonElement = DOM.createDiv();
@@ -88,7 +89,8 @@ public class ResetButtonForTextFieldConnector extends
     }
 
     private void updateResetButtonVisibility() {
-        if (textField.getValue().isEmpty()) {
+        if (textField.getValue().isEmpty()
+                || textField.getStyleName().contains("v-textfield-prompt")) {
             resetButtonElement.getStyle().setDisplay(Display.NONE);
         } else {
             resetButtonElement.getStyle().clearDisplay();

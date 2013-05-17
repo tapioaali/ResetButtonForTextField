@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Implementation-Title: ResetButtonForTextField
-Implementation-Version: 1.0.4
+Implementation-Version: 1.0.5
 Vaadin-Package-Version: 1
 Vaadin-Widgetsets: org.vaadin.resetbuttonfortextfield.widgetset.ResetB
  uttonForTextFieldWidgetset
