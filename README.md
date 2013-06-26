@@ -3,7 +3,7 @@ component allowing user to reset the field with one click.
 
 The reset button is drawn using SVG images in supported browsers. With IE8 PNG versions of those are used.
 
-Also an example project for my blog post [Extending components in Vaadin 7](https://vaadin.com/blog/-/blogs/extending-components-in-vaadin-7).
+Also an example project for a blog post [Extending components in Vaadin 7](https://vaadin.com/blog/-/blogs/extending-components-in-vaadin-7).
 
 Usage: add the JAR to your project, compile widgetset and then extend any TextField:
 
