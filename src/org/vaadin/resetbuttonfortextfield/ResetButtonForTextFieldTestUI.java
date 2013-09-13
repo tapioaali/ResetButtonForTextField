@@ -25,18 +25,29 @@ public class ResetButtonForTextFieldTestUI extends UI {
 
         final TextField tf = new TextField("Type something, please");
         tf.setInputPrompt("Some text here");
-        ResetButtonForTextField.extend(tf);
+
+        final ResetButtonForTextField resetButton = ResetButtonForTextField
+                .extend(tf);
+
         layout.addComponent(tf);
         tf.setImmediate(true);
         tf.setWidth("300px");
 
         final Label textChangeEventListenerLabel = new Label();
-        textChangeEventListenerLabel.setCaption("I show textChangeEvents!");
+        textChangeEventListenerLabel.setHeight("20px");
+        textChangeEventListenerLabel.setCaption("I show text changes!");
         layout.addComponent(textChangeEventListenerLabel);
 
         final Label valueChangeListenerLabel = new Label();
-        valueChangeListenerLabel.setCaption("I show valueChangeEvents!");
+        valueChangeListenerLabel.setCaption("I show value changes!");
         layout.addComponent(valueChangeListenerLabel);
+        valueChangeListenerLabel.setHeight("20px");
+
+        final Label resetButtonClickListenerLabel = new Label();
+        resetButtonClickListenerLabel
+                .setCaption("I notice reset button clicks!");
+        layout.addComponent(resetButtonClickListenerLabel);
+        resetButtonClickListenerLabel.setHeight("20px");
 
         tf.addValueChangeListener(new Property.ValueChangeListener() {
             @Override
@@ -52,6 +63,19 @@ public class ResetButtonForTextFieldTestUI extends UI {
                 textChangeEventListenerLabel.setValue(event.getText());
             }
         });
+
+        resetButton
+                .addResetButtonClickedListener(new ResetButtonClickListener() {
+                    private int clickCount = 0;
+
+                    @Override
+                    public void resetButtonClicked() {
+                        clickCount++;
+                        resetButtonClickListenerLabel
+                                .setValue("Reset button clicked " + clickCount
+                                        + " times");
+                    }
+                });
 
         Button b1 = new Button("Clear the value of the textfield",
                 new Button.ClickListener() {
