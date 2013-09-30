@@ -10,7 +10,7 @@ import com.vaadin.server.AbstractExtension;
 import com.vaadin.ui.TextField;
 
 public class ResetButtonForTextField extends AbstractExtension {
-    private List<ResetButtonClickListener> listeners;
+    private List<ResetButtonClickListener> listeners = new ArrayList<ResetButtonClickListener>();
 
     private ResetButtonClickRpc resetButtonClickRpc = new ResetButtonClickRpc() {
         @Override
@@ -32,15 +32,10 @@ public class ResetButtonForTextField extends AbstractExtension {
     }
 
     public void addResetButtonClickedListener(ResetButtonClickListener listener) {
-        if (listeners == null) {
-            listeners = new ArrayList<ResetButtonClickListener>();
-        }
         listeners.add(listener);
     }
 
     public void removeResetButtonClickListener(ResetButtonClickListener listener) {
-        if (listeners != null) {
-            listeners.remove(listener);
-        }
+        listeners.remove(listener);
     }
 }
