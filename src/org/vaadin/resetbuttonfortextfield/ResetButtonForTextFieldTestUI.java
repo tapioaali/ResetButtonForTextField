@@ -87,15 +87,32 @@ public class ResetButtonForTextFieldTestUI extends UI {
         Button b2 = new Button(
                 "Set the value of the textfield to current date",
                 new Button.ClickListener() {
-
                     @Override
                     public void buttonClick(ClickEvent event) {
                         tf.setValue(new Date().toString());
                     }
                 });
+        Button b3 = new Button(
+                "Toggle Enabled", 
+                new Button.ClickListener() {
+                    @Override
+                    public void buttonClick(ClickEvent event) {
+                        tf.setEnabled(!tf.isEnabled());
+                    }
+                });
+        Button b4 = new Button(
+                "Toggle Read Only", 
+                new Button.ClickListener() {
+                    @Override
+                    public void buttonClick(ClickEvent event) {
+                        tf.setReadOnly(!tf.isReadOnly());
+                    }
+                });
 
         layout.addComponent(b1);
         layout.addComponent(b2);
+        layout.addComponent(b3);
+        layout.addComponent(b4);
     }
 
 }

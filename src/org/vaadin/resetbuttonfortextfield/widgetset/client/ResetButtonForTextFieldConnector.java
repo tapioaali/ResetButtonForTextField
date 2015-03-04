@@ -93,6 +93,7 @@ public class ResetButtonForTextFieldConnector extends
 
     private void updateResetButtonVisibility() {
         if (textField.getValue().isEmpty()
+        		|| textField.isReadOnly() || !textField.isEnabled()
                 || textField.getStyleName().contains("v-textfield-prompt")) {
             resetButtonElement.getStyle().setDisplay(Display.NONE);
         } else {
