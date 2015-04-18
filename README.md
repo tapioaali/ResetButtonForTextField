@@ -12,7 +12,7 @@ Either add Maven
 	<dependency>
 	   <groupId>org.vaadin.addons</groupId>
 	   <artifactId>resetbuttonfortextfield</artifactId>
-	   <version>1.1.1</version>
+	   <version>1.2</version>
 	</dependency>
 
 or Ivy dependency
@@ -20,7 +20,7 @@ or Ivy dependency
 	<dependency 
 	   org="org.vaadin.addons" 
 	   name="resetbuttonfortextfield" 
-	   rev="1.1.1" />
+	   rev="1.2" />
 
 or just add the JAR to your project, compile the widgetset and then extend any TextField:
 
