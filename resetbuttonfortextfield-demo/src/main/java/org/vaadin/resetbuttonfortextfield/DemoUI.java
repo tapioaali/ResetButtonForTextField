@@ -1,5 +1,9 @@
 package org.vaadin.resetbuttonfortextfield;
 
+import java.util.Date;
+
+import javax.servlet.annotation.WebServlet;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -12,9 +16,6 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
-
-import javax.servlet.annotation.WebServlet;
-import java.util.Date;
 
 @Theme("valo")
 @Title("Reset Button for TextField Extension Demo")
@@ -113,7 +114,6 @@ public class DemoUI extends UI {
                 tf.setReadOnly(!tf.isReadOnly());
             }
         });
-
 
         layout.addComponent(b1);
         layout.addComponent(b2);

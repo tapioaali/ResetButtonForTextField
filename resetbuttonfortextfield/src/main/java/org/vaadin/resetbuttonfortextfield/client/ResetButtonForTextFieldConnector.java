@@ -28,7 +28,7 @@ public class ResetButtonForTextFieldConnector extends
 
     private VTextField textField;
     private Element resetButtonElement;
-    private ResetButtonClickRpc resetButtonClickRpc = RpcProxy.create(
+    private final ResetButtonClickRpc resetButtonClickRpc = RpcProxy.create(
             ResetButtonClickRpc.class, this);
 
     @Override
@@ -92,7 +92,8 @@ public class ResetButtonForTextFieldConnector extends
     }
 
     private void updateResetButtonVisibility() {
-        if (textField.getValue().isEmpty() || textField.isReadOnly() || !textField.isEnabled()
+        if (textField.getValue().isEmpty() || textField.isReadOnly()
+                || !textField.isEnabled()
                 || textField.getStyleName().contains("v-textfield-prompt")) {
             resetButtonElement.getStyle().setDisplay(Display.NONE);
         } else {
