@@ -3,7 +3,7 @@ package org.vaadin.resetbuttonfortextfield;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.vaadin.resetbuttonfortextfield.widgetset.client.ResetButtonClickRpc;
+import org.vaadin.resetbuttonfortextfield.client.ResetButtonClickRpc;
 
 import com.vaadin.server.AbstractClientConnector;
 import com.vaadin.server.AbstractExtension;

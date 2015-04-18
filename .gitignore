@@ -5,3 +5,8 @@ WebContent/VAADIN/widgetsets
 .classpath
 .project
 .settings
+.idea
+*.iml
+resetbuttonfortextfield/target
+resetbuttonfortextfield-demo/target
+resetbuttonfortextfield-demo/src/main/webapp/VAADIN/widgetsets

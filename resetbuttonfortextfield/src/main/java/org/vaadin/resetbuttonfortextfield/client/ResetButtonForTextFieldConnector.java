@@ -1,4 +1,4 @@
-package org.vaadin.resetbuttonfortextfield.widgetset.client;
+package org.vaadin.resetbuttonfortextfield.client;
 
 import org.vaadin.resetbuttonfortextfield.ResetButtonForTextField;
 
@@ -59,10 +59,10 @@ public class ResetButtonForTextFieldConnector extends
 
     public native void addResetButtonClickListener(Element el)
     /*-{
-        var self = this; 
-        el.onclick = $entry(function() { 
-            self.@org.vaadin.resetbuttonfortextfield.widgetset.client.ResetButtonForTextFieldConnector::clearTextField()();
-        }); 
+        var self = this;
+        el.onclick = $entry(function () {
+            self.@org.vaadin.resetbuttonfortextfield.client.ResetButtonForTextFieldConnector::clearTextField()();
+        });
     }-*/;
 
     public native void removeResetButtonClickListener(Element el)
@@ -92,7 +92,7 @@ public class ResetButtonForTextFieldConnector extends
     }
 
     private void updateResetButtonVisibility() {
-        if (textField.getValue().isEmpty()
+        if (textField.getValue().isEmpty() || textField.isReadOnly() || !textField.isEnabled()
                 || textField.getStyleName().contains("v-textfield-prompt")) {
             resetButtonElement.getStyle().setDisplay(Display.NONE);
         } else {

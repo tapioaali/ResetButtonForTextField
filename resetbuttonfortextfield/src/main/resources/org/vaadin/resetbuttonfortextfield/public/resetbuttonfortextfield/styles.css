@@ -5,28 +5,28 @@
 .resetbuttonfortextfield-resetbutton {
     position: relative;
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
     right: 15pt;
     margin-right: -15pt;
-    top: -3pt;
+    top: 4pt;
     cursor: pointer;
     width: 16px;
     height: 16px;
-    background-image: url(resetbutton-default.svg);
+    background-image: url('resetbutton-default.svg');
     background-position: center center;
     background-repeat: no-repeat;
 }
 
 .resetbuttonfortextfield-resetbutton:hover {
-    background-image: url(resetbutton-hover.svg);
+    background-image: url('resetbutton-hover.svg');
     cursor: pointer;
 }
 
 .v-ie8 .resetbuttonfortextfield-resetbutton {
-    background-image: url(resetbutton-default.png);
+    background-image: url('resetbutton-default.png');
 }
 
 .v-ie8 .resetbuttonfortextfield-resetbutton:hover {
-    background-image: url(resetbutton-hover.png);    
+    background-image: url('resetbutton-hover.png');
 }
 

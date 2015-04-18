@@ -1,21 +1,29 @@
 package org.vaadin.resetbuttonfortextfield;
 
-import java.util.Date;
-
+import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
+import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.data.Property;
-import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.event.FieldEvents;
-import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 
-@SuppressWarnings("serial")
-public class ResetButtonForTextFieldTestUI extends UI {
+import javax.servlet.annotation.WebServlet;
+import java.util.Date;
+
+@Theme("valo")
+@Title("Reset Button for TextField Extension Demo")
+public class DemoUI extends UI {
+
+    @WebServlet(value = "/*", asyncSupported = true)
+    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class, widgetset = "org.vaadin.resetbuttonfortextfield.DemoWidgetSet")
+    public static class Servlet extends VaadinServlet {
+    }
 
     @Override
     protected void init(VaadinRequest request) {
@@ -51,7 +59,7 @@ public class ResetButtonForTextFieldTestUI extends UI {
 
         tf.addValueChangeListener(new Property.ValueChangeListener() {
             @Override
-            public void valueChange(ValueChangeEvent event) {
+            public void valueChange(Property.ValueChangeEvent event) {
                 valueChangeListenerLabel.setValue(event.getProperty()
                         .getValue().toString());
             }
@@ -59,7 +67,7 @@ public class ResetButtonForTextFieldTestUI extends UI {
 
         tf.addTextChangeListener(new FieldEvents.TextChangeListener() {
             @Override
-            public void textChange(TextChangeEvent event) {
+            public void textChange(FieldEvents.TextChangeEvent event) {
                 textChangeEventListenerLabel.setValue(event.getText());
             }
         });
@@ -80,7 +88,7 @@ public class ResetButtonForTextFieldTestUI extends UI {
         Button b1 = new Button("Clear the value of the textfield",
                 new Button.ClickListener() {
                     @Override
-                    public void buttonClick(ClickEvent event) {
+                    public void buttonClick(Button.ClickEvent event) {
                         tf.setValue("");
                     }
                 });
@@ -89,13 +97,28 @@ public class ResetButtonForTextFieldTestUI extends UI {
                 new Button.ClickListener() {
 
                     @Override
-                    public void buttonClick(ClickEvent event) {
+                    public void buttonClick(Button.ClickEvent event) {
                         tf.setValue(new Date().toString());
                     }
                 });
+        Button b3 = new Button("Toggle Enabled", new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                tf.setEnabled(!tf.isEnabled());
+            }
+        });
+        Button b4 = new Button("Toggle ReadOnly", new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                tf.setReadOnly(!tf.isReadOnly());
+            }
+        });
+
 
         layout.addComponent(b1);
         layout.addComponent(b2);
+        layout.addComponent(b3);
+        layout.addComponent(b4);
     }
 
 }
