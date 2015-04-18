@@ -2,3 +2,6 @@ build
 rebel.xml
 *.launch
 WebContent/VAADIN/widgetsets
+.classpath
+.project
+.settings
