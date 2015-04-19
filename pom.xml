@@ -5,8 +5,8 @@
     <groupId>org.vaadin</groupId>
     <artifactId>resetbuttonfortextfield-root</artifactId>
     <packaging>pom</packaging>
-    <version>1.2</version>
-    <name>Reset Button for TextField Extension Root Project</name>
+    <version>1.2.1</version>
+    <name>ResetButtonForTextField Root Project</name>
     <modules>
         <module>resetbuttonfortextfield</module>
         <module>resetbuttonfortextfield-demo</module>
