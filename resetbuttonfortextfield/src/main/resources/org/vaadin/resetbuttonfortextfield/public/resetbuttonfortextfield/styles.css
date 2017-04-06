@@ -21,12 +21,3 @@
     background-image: url('resetbutton-hover.svg');
     cursor: pointer;
 }
-
-.v-ie8 .resetbuttonfortextfield-resetbutton {
-    background-image: url('resetbutton-default.png');
-}
-
-.v-ie8 .resetbuttonfortextfield-resetbutton:hover {
-    background-image: url('resetbutton-hover.png');
-}
-

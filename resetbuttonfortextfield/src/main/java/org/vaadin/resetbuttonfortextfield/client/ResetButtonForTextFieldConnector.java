@@ -3,29 +3,24 @@ package org.vaadin.resetbuttonfortextfield.client;
 import org.vaadin.resetbuttonfortextfield.ResetButtonForTextField;
 
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.DOM;
-import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.RpcProxy;
-import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.client.ui.VTextField;
+import com.vaadin.client.ui.textfield.AbstractTextFieldConnector;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(ResetButtonForTextField.class)
-public class ResetButtonForTextFieldConnector extends
-        AbstractExtensionConnector implements KeyUpHandler,
-        AttachEvent.Handler, StateChangeEvent.StateChangeHandler {
-    private static final long serialVersionUID = -737765038361894693L;
+public class ResetButtonForTextFieldConnector extends AbstractExtensionConnector {
+
+    private static final long serialVersionUID = -2256196181999395573L;
 
     public static final String CLASSNAME = "resetbuttonfortextfield";
 
+    private AbstractTextFieldConnector textFieldConnector;
     private VTextField textField;
     private Element resetButtonElement;
     private final ResetButtonClickRpc resetButtonClickRpc = RpcProxy.create(
@@ -33,28 +28,18 @@ public class ResetButtonForTextFieldConnector extends
 
     @Override
     protected void extend(ServerConnector target) {
-        target.addStateChangeHandler(new StateChangeEvent.StateChangeHandler() {
-            private static final long serialVersionUID = -8439729365677484553L;
+        textFieldConnector = (AbstractTextFieldConnector) target;
+        textFieldConnector.addStateChangeHandler(stateChangeEvent ->
+            Scheduler.get().scheduleDeferred(() -> updateResetButtonVisibility()));
 
-            @Override
-            public void onStateChanged(StateChangeEvent stateChangeEvent) {
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    @Override
-                    public void execute() {
-                        updateResetButtonVisibility();
-                    }
-                });
-            }
-        });
-
-        textField = (VTextField) ((ComponentConnector) target).getWidget();
+        textField = (VTextField) textFieldConnector.getWidget();
         textField.addStyleName(CLASSNAME + "-textfield");
 
         resetButtonElement = DOM.createDiv();
         resetButtonElement.addClassName(CLASSNAME + "-resetbutton");
 
-        textField.addAttachHandler(this);
-        textField.addKeyUpHandler(this);
+        textField.addAttachHandler(event -> handleAttach(event.isAttached()));
+        textField.addKeyUpHandler(change -> updateResetButtonVisibility());
     }
 
     public native void addResetButtonClickListener(Element el)
@@ -70,9 +55,8 @@ public class ResetButtonForTextFieldConnector extends
         el.onclick = null;
     }-*/;
 
-    @Override
-    public void onAttachOrDetach(AttachEvent event) {
-        if (event.isAttached()) {
+    private void handleAttach(boolean isAttached) {
+        if (isAttached) {
             textField.getElement().getParentElement()
                     .insertAfter(resetButtonElement, textField.getElement());
             updateResetButtonVisibility();
@@ -84,11 +68,6 @@ public class ResetButtonForTextFieldConnector extends
             }
             removeResetButtonClickListener(resetButtonElement);
         }
-    }
-
-    @Override
-    public void onKeyUp(KeyUpEvent event) {
-        updateResetButtonVisibility();
     }
 
     private void updateResetButtonVisibility() {
@@ -104,7 +83,7 @@ public class ResetButtonForTextFieldConnector extends
     private void clearTextField() {
         resetButtonClickRpc.resetButtonClick();
         textField.setValue("");
-        textField.valueChange(true);
+        textFieldConnector.sendValueChange();
         updateResetButtonVisibility();
         textField.getElement().focus();
     }
